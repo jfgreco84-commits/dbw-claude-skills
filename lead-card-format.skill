@@ -1,0 +1,202 @@
+---
+name: lead-card-format
+description: DBW HTML lead card formatter. Call this
+skill in Step 6 of any DBW daily lead delivery task.
+Pass in all five completed lead objects including
+company data, contacts, REED intel, supplier intel,
+opening lines, field read, and Sage status. Returns
+a fully formatted HTML email ready to be inserted
+into a Gmail draft. Handles the complete email
+structure from header to call log footer. Do not
+build any HTML manually in the task prompt.
+---
+
+# DBW LEAD CARD FORMAT SKILL
+
+## PURPOSE
+This skill owns all HTML formatting for DBW daily
+lead delivery emails. When called, it receives
+structured lead data and outputs a complete HTML
+email body ready to insert into a Gmail draft.
+The calling task does zero formatting — it only
+collects data and passes it here.
+
+## INPUTS REQUIRED
+Pass all of the following before calling this skill.
+Use the label Not found for any field that could
+not be verified rather than leaving it blank.
+
+For the email header, pass one time for the whole
+email: rep name and nickname, today's date, states
+and city clusters being worked, number of leads,
+market cluster summary sentence, blade profile for
+this market, call theme sentence, and data source.
+
+For the shared market intel block, pass one time:
+ready-mix and concrete suppliers found, supply
+houses found, equipment rental companies found,
+and DOT activity description with corridor name-drop.
+
+For each of the five lead cards pass: company name
+and city and state, full address, phone, website,
+company type, revenue estimate, employee count,
+year founded or years in operation, NAICS code,
+company insight paragraph, all contacts with name
+and title and mobile and direct and email, Sage
+last invoice date if known, blade angle paragraph,
+company-specific buying signals paragraph, REED
+project intel block, local suppliers list with city
+and state and phone, V1 and V2 and V3 opening lines
+fully written out, and field read recommendation.
+
+## HTML OUTPUT SPECIFICATION
+Generate a complete HTML document using inline
+styles only. No external stylesheets. No JavaScript.
+Gmail strips anything that is not inline so every
+style must be written directly on each element.
+Use a max-width of 900px centered on the page.
+Font family for all text: Arial, sans-serif.
+
+SECTION A — EMAIL HEADER
+Full-width div, background #000000, padding 24px.
+Rep name and date in bold 26px color #FFD700.
+Territory and market clusters in 13px #FFD700.
+Blade profile and call theme in 12px italic #B8A000.
+Data source note in 11px #888888.
+
+SECTION B — SAGE WARNING BANNER
+Full-width div, background #CC0000, padding 14px 18px.
+Warning triangle symbol followed by bold white 13px
+text: IMPORTANT — READ BEFORE YOU DIAL:
+Below in regular white 12px: these leads must be
+cross-referenced in Sage before calling, check for
+existing accounts, open orders, prior relationships,
+or assigned reps, do not call an active account
+without checking first, Sage check is mandatory,
+no exceptions.
+
+SECTION C — MARKET CLUSTER OVERVIEW
+Full-width div, background #1B5E20, padding 16px.
+Bold white 14px header: TODAY'S MARKET CLUSTER —
+ZoomInfo VERIFIED — SAME METRO, SAME TRADE.
+Metro cluster details and blade profile and call
+theme in 12px white. Data source in 11px #A5D6A7.
+
+SECTION D — SHARED MARKET INTEL TABLE
+Full-width div, background #E8F5E9, padding 16px.
+Title in bold dark green #1B5E20 at 13px.
+Full-width table with light gray borders #CCCCCC
+and cell padding 8px 12px.
+Include exactly four rows and no others.
+Row one: Ready-Mix and Concrete.
+Row two: Supply Houses.
+Row three: Equipment Rental.
+Row four: DOT Activity.
+Left column bold #2E7D32 at 12px.
+Right column black at 12px.
+Do not add any other rows. Do not include blade
+dealers, brands in market, pricing intel, or
+competitor information under any circumstances.
+
+SECTION E — LEAD CARDS
+Repeat the following structure for all five leads.
+Separate each card with a horizontal rule #CCCCCC.
+
+LEAD CARD HEADER: full-width div, background #0D1B2A,
+padding 14px 18px, white bold 15px showing lead
+number and company name and city and state.
+
+COMPANY DATA GRID: white background, border #DDDDDD,
+four columns by two rows. Row one: Address, Phone,
+Website, Company Type. Row two: Revenue, Employees,
+Founded, NAICS. Labels bold #555555 at 11px, values
+black at 12px.
+
+COMPANY INSIGHT BLOCK: left border 4px solid #FF6F00,
+background #FFF3E0, padding 12px 16px. Bold #FF6F00
+label: Company Insight: followed by the specific
+insight paragraph in black 12px. Must describe what
+the company does, how long they have operated, what
+project types they run, and why they are a strong
+blade prospect. Never use generic filler text.
+
+KEY CONTACTS TABLE: header background #1A237E, white
+bold header text at 12px. Columns: Name, Title,
+Mobile, Direct, Email. Alternating rows white and
+#F5F5F5. Append ZI in bold green #2E7D32 after any
+mobile number sourced from ZoomInfo. Show a centered
+dash for any field not found.
+
+SAGE CHECK BLOCK: left border 4px solid #CC0000,
+background #FFEBEE, padding 12px 16px. Bold red
+label: SAGE CHECK REQUIRED BEFORE CALLING.
+Three checkbox lines:
+[ ] New Account 36 plus months — 25 percent commission
+[ ] Reactivation 18 to 36 months — standard rate
+[ ] Active Account — pass to current rep blank line
+One line below: Last Invoice Date: blank line.
+
+BLADE ANGLE BLOCK: left border 4px solid #2E7D32,
+background #F1F8E9, padding 12px 16px. Bold green
+label: Blade Angle: followed by specific blade types
+and sizes this contractor needs based on their trade
+and equipment. Distinguish walk-behind from ride-on
+if signals exist. Include reorder cycle assessment
+if the data supports it. No generic filler.
+
+BUYING SIGNALS BLOCK: left border 4px solid #1565C0,
+background #E3F2FD, padding 12px 16px. Bold blue
+label: Company-Specific Buying Signals: followed by
+specific signals indicating active blade purchasing.
+Reference DOT contracts, active projects, ZoomInfo
+scoops, or growth signals. No filler.
+
+REED PROJECT INTEL BLOCK: left border 4px solid
+#B71C1C, background #FCE4EC, padding 12px 16px.
+Bold dark red label: REED Project Intel: followed
+by the full REED output. If a verified project was
+found, show project name, awarding authority, award
+date, PWD name, and complete bidder list. If no
+project was found, show the DOT corridor name-drop
+angle and PWD name if available.
+
+LOCAL SUPPLIERS BLOCK: left border 4px solid #6A1B9A,
+background #F3E5F5, padding 12px 16px. Bold purple
+label: Local Suppliers likely buying from: followed
+by a bulleted list showing supplier name, city,
+state, and phone. Real businesses only. 2 to 4
+suppliers per lead card.
+
+OPENING LINES BLOCK: left border 4px solid #E65100,
+background #FFF8E1, padding 12px 16px. Bold orange
+label: Opening Lines: followed by all three versions.
+
+V1 AGGRESSIVE in bold #CC0000 with italic gray use-when
+note. Full script with all blanks filled in using
+real data from this lead card.
+
+V2 MIDWEST in bold #1565C0 with italic gray use-when
+note. Full script with all blanks filled in.
+
+V3 SHORTCUT in bold #2E7D32 with italic gray use-when
+note. Full script with all blanks filled in.
+
+FIELD READ in bold black: one sentence explaining
+which version fits this contact and why based on
+what is known about their role and personality.
+
+CALL LOG FOOTER: background #F5F5F5, padding 10px 16px,
+border top 1px solid #CCCCCC. Text in #555555 at 11px:
+Called: blank | Reached: YES / NO / VM |
+Follow-up date: blank.
+
+## OUTPUT RULES
+Return only valid HTML with all styles inline.
+Do not return markdown. Do not wrap in code blocks.
+Do not include any text outside the HTML document.
+Every field passed in must appear in the output.
+Never add sections not specified above.
+Never omit sections that are specified above.
+If a passed value is Not found, render it as a
+centered dash in tables or the words Not found in
+paragraph blocks so the rep knows to investigate.

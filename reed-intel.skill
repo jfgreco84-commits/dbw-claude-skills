@@ -1,0 +1,121 @@
+---
+name: reed-intel
+description: DBW REED Project Intelligence skill.
+Use this skill whenever you need to find what
+construction project a contractor is bidding on or
+was awarded, who the Director of Public Works is
+for a city, or who else bid on the same project.
+REED intel is the core of DBW cold call strategy.
+Always use when building DBW lead cards, when asked
+for project intel on a contractor, or when generating
+opening lines for DBW sales calls.
+---
+
+# REED PROJECT INTEL SKILL
+
+## PURPOSE
+REED intel is the ammunition that makes DBW reps
+sound like insiders instead of telemarketers. When
+a rep says I was talking to the Director of Public
+Works over at the city — he mentioned you guys won
+the project name — the contractor assumes it is a
+warm relationship. Your job is to find that intel
+fast, accurately, and in enough depth to load the
+rep with multiple name-drops and conversation angles.
+
+## INPUTS REQUIRED
+Company name and city and state.
+
+## STEP 1 — TANGO PRIMARY SOURCE
+Tango searches US government contracting data
+including awarded contracts, active bids, and
+DOT projects.
+
+Search approach: use search_opportunities with
+company name plus state to get the project list.
+Then use get_details on each result to pull full
+project info including all bidders.
+Also search city plus construction type if the
+company name returns nothing — try city plus paving
+or city plus utilities or city plus highway.
+
+Pull 2 to 3 projects per company, most recent first.
+
+From get_details extract: project name and scope
+description, award date or bid date, awarding
+authority including city or county or DOT district
+or school board, contract value, the complete
+bidder list showing every company that submitted
+a bid not just the winner, and project status.
+
+The bidder list is gold. These are companies doing
+the same work in the same market. The rep can call
+all of them. List every single one.
+
+## STEP 2 — ZOOMINFO SCOOPS
+After Tango, run enrich_scoops and enrich_news on
+the company. Scoops may reveal project wins,
+equipment purchases, expansions, and new contracts.
+News may mention specific awarded contracts not in
+Tango's database. A scoop saying just won a large
+highway contract in a city is usable project intel
+even without a full bid record.
+
+## STEP 3 — TAVILY BACKUP
+Use only if Tango and scoops return nothing.
+Run one search using this query format:
+company name plus city plus state plus construction
+contract awarded bid won 2024 2025 2026 public
+works DOT project bidders.
+
+Extract all three from this one call: project names
+and scope, Director of Public Works name, and other
+bidders. Also try searching city plus state plus
+ConstructConnect awarded contracts 2025 2026 to
+find city-level project activity.
+
+## CONFIDENCE RULE
+Government database results from Tango: include them.
+Government website results via Tavily: include them.
+News article confirming an award: include it.
+ZoomInfo scoop: include it and note the source.
+Cannot verify: write No verified project found.
+Never fabricate project names, PWD names, or bidder
+company names under any circumstances.
+
+## WHEN NO PROJECT IS FOUND
+Write: No verified project found — use general
+DOT name-drop. Then provide the Director of Public
+Works name from Tango or Tavily search if found,
+and provide this general opener for the rep to use:
+I work with the city Department of Public Works and
+several contractors doing paving or utilities or
+commercial work in the area.
+
+## OUTPUT FORMAT
+Return the following block for each company:
+
+PROJECT 1 most recent:
+Name and description of project name and scope.
+Awarded: month and year.
+Awarding Authority: city or county or state DOT
+or school district.
+Project location: city and county.
+Contract Value: dollar amount if found.
+Status: In Bid or Awarded or Active or Completed.
+All Bidders Found: list every company that bid,
+typically 5 to 15 companies.
+
+PROJECT 2 previous: same format.
+PROJECT 3 older: same format if found.
+
+Director of Public Works: name, title, city or county.
+Other Key Name Drops: any project stakeholders,
+city engineers, or DOT contacts found.
+
+## OPENING LINE CONSTRUCTION
+Once REED intel is in hand, pass the PWD name and
+the top 1 to 2 competing bidder names to the
+dbw-opening-lines skill as name drop inputs.
+Those become the backbone of the cold call opener
+that makes the rep sound like an insider.

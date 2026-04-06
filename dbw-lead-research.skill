@@ -1,0 +1,105 @@
+---
+name: dbw-lead-research
+description: DBW lead research skill. Use this skill
+when pulling and qualifying construction companies
+as leads for Diamond Blade Warehouse sales reps.
+Handles company sourcing from ZoomInfo, ConstructConnect,
+Tango, and free web sources. Applies all targeting
+and disqualification logic. Returns a qualified list
+of companies ready for contact enrichment.
+---
+
+# DBW LEAD RESEARCH SKILL
+
+## PURPOSE
+Pull qualified construction contractor companies
+from available sources for a given rep territory
+and city cluster. Apply all targeting and
+disqualification filters. Return only companies
+that meet full qualification standards.
+
+## QUALIFICATION STANDARDS
+Every company must meet all of the following
+before being passed forward as a lead candidate.
+
+The company must be a self-performing contractor
+with crews actively on site using saws and blades.
+The company must fall within the size range of
+2 to 500 employees and $1M to $20M in revenue.
+The company must be headquartered or actively
+operating in the rep's assigned territory and
+city cluster for today's run.
+The company must not have been delivered as a
+lead in any previous run for this rep.
+The company must not be on the auto-skip list.
+
+## TARGET COMPANY TYPES
+Primary targets — always fill from here first:
+Concrete contractors, roadway and DOT contractors,
+curb and gutter crews, bridge contractors, airport
+and runway contractors, commercial concrete crews
+that are self-performing, asphalt and paving
+contractors, masonry contractors, site work
+contractors, utility and underground contractors,
+and demolition contractors.
+
+Secondary targets — use to fill remaining slots
+if Primary cannot reach 5 leads:
+Core drilling companies.
+
+Low priority — use only as a last resort to fill
+a gap when Primary and Secondary together fall
+short of 5 leads:
+Professional concrete cutting and sawing specialty
+firms. Note that these contacts are technically
+sophisticated, negotiate extremely hard, frequently
+return product, and routinely give reps difficulty
+after the sale. They are harder closes with higher
+rep risk. Never pull as a first choice.
+
+Auto-skip these company types under all circumstances:
+General contractors who subcontract all field work,
+architects, engineers, supply houses, equipment
+rental companies, developers, and consultants.
+The simple test is: if they do not have guys on
+site running saws, skip them without exception.
+
+## SOURCE ORDER
+Pull from sources in this exact sequence. Move to
+the next source only when the current one returns
+fewer than 5 qualified candidates after filtering.
+
+ZoomInfo first: Search Companies using NAICS codes
+238140, 237310, and 238110 filtered to the rep's
+assigned city cluster and size range of 2 to 500
+employees. Pull 8 to 10 candidates to allow for
+disqualification after filtering.
+
+ConstructConnect second: Pull active or recently
+awarded projects in the territory. Extract every
+bidding subcontractor listed. Each bidder is a
+potential candidate to run through the qualification
+filter above.
+
+Tango third: Search DOT and government awarded
+contracts in the territory. Pull all active
+contractor names from the results and run them
+through the qualification filter.
+
+Free web sources last resort only: Use only if
+the three sources above combined cannot produce
+5 qualified leads. Search using any combination
+of Google, LinkedIn company search, Facebook and
+Instagram business pages showing active jobsite
+work, Manta.com, BBB.org, and Bluebook.com.
+Any result that surfaces a real company name,
+address, and verifiable phone number is a valid
+candidate to run through the qualification filter.
+
+## OUTPUT
+Return a list of exactly 5 qualified company names
+with their full address, phone number, website,
+company type, revenue estimate, employee count,
+and the source that found them. These companies
+are then passed to dbw-contact-enrichment.skill
+for contact enrichment in the next step.

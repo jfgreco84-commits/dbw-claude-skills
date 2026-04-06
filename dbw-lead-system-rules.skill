@@ -1,0 +1,146 @@
+---
+name: dbw-lead-system-rules
+description: Universal system rules for all DBW daily
+lead delivery tasks. Call this skill at the very start
+of every DBW lead task before taking any other action.
+It loads all hard stop rules, Sage compliance rules,
+company targeting criteria, source waterfall order,
+and company size filters that apply identically to
+every rep. After loading this skill, proceed to the
+rep-specific steps in the task prompt.
+---
+
+# DBW LEAD SYSTEM — UNIVERSAL RULES
+
+## HARD STOP RULES
+These apply to every rep, every run, no exceptions.
+If any tool fails twice in a row: skip that lead
+and move to the next. Do not retry endlessly.
+If runtime hits 15 minutes: stop, log shortfall, done.
+Never fabricate company names, contacts, or numbers.
+Never duplicate a company delivered in a previous run.
+
+## SAGE COMPLIANCE RULES
+Print the full Sage compliance block on every single
+lead card without exception. These rules govern
+whether a rep can work a lead and what commission
+rate applies. They are non-negotiable.
+
+RULE 1 — Cross-reference in Sage before any call.
+Not optional. No exceptions ever.
+
+RULE 2 — Active Account (invoice within 18 months):
+Lead is NOT available to this rep. Pass the full
+lead card immediately to the rep who currently owns
+this account in Sage. Do not call. Do not prospect.
+
+RULE 3 — Reactivation (invoice 18 to 36 months ago):
+Lead is fair game to prospect. Does NOT qualify for
+the new account commission rate of 25%. Standard
+commission rates apply until 36 full months have
+passed since the last invoice date.
+
+RULE 4 — New Account (36+ months or never invoiced):
+Fully fair game. Qualifies for the new account
+commission rate of 25% upon first sale.
+
+## COMPANY SIZE FILTER
+Sweet spot: 2-500 employees, $1M-$20M revenue.
+Must have crews actively on site using saws and blades.
+Self-performing only. Skip subcontracting-only firms.
+
+## WHO TO TARGET
+Fill all 5 leads from Primary targets first. Move to
+Secondary only if Primary cannot fill all 5 slots.
+Use Low Priority only as an absolute last resort.
+
+Primary — always pull from here first:
+Concrete contractors, roadway and DOT contractors,
+curb and gutter crews, bridge contractors, airport
+and runway contractors, commercial concrete crews
+that are self-performing, asphalt and paving
+contractors, masonry contractors, site work
+contractors, utility and underground contractors,
+demolition contractors.
+
+Secondary — fill remaining slots if Primary is short:
+Core drilling companies.
+
+Low Priority — use only to fill a gap when Primary
+and Secondary together cannot reach 5 leads:
+Professional concrete cutting and sawing specialty
+firms. These contacts negotiate extremely hard,
+frequently return product, and routinely give reps
+a difficult time after the sale. Never first choice.
+
+Auto-skip under all circumstances:
+GCs who subcontract all field work, architects,
+engineers, supply houses, equipment rental companies,
+developers, and consultants. If they do not have
+guys on site running saws, skip them without
+exception.
+
+## SOURCE WATERFALL ORDER
+Work through sources in this exact order for every
+rep. Move to the next source only when the current
+one returns fewer than 5 qualified results.
+
+SOURCE 1 — ZoomInfo (always start here):
+Use the ZoomInfo connector. Call Search Companies.
+NAICS codes: 238140, 237310, 238110.
+Location: the rep's assigned city cluster for today.
+Size filter: 2-500 employees.
+Pull 8-10 candidates to allow for disqualification.
+Extract all available company data before moving on.
+
+SOURCE 2 — ConstructConnect:
+Pull active or recently awarded projects in territory.
+Extract every bidding subcontractor from each project.
+Each bidder is a potential lead candidate.
+
+SOURCE 3 — Tango:
+Search DOT and government awarded contracts in
+territory. Pull all active contractor names found.
+
+SOURCE 4 — Free web (last resort only):
+Use only if Sources 1 through 3 combined have not
+produced 5 qualified leads. Search using any
+combination of Google, LinkedIn company search,
+Facebook and Instagram business pages showing active
+jobsite work, Manta.com, BBB.org, and Bluebook.com.
+
+## CONTACT ENRICHMENT RULES
+Run dbw-contact-enrichment.skill for every company.
+ZoomInfo Enrich Contacts and Enrich Scoops are always
+the first calls. Mobile number from ZoomInfo is always
+the priority contact number.
+Find between 1 and 5 contacts per company.
+Contact priority order: Owner or President or Partner
+first, then Superintendent or Site Super or Shop
+Manager, then Operations Manager or VP Operations,
+then Project Manager, then Foreman as last resort.
+If no verified contact with a real phone number is
+found after exhausting all fallback sources:
+disqualify that lead and replace it. No placeholders.
+No guessed numbers. No fabricated data. Ever.
+
+## DELIVERY RULES
+The Gmail draft must be fully formatted HTML.
+Do not deliver plain text under any circumstances.
+One Gmail draft per rep per day to jfgreco84@gmail.com
+Run lead-card-format.skill to build the HTML output.
+Do not send the email. Create the draft only.
+After the Gmail draft is created: STOP. Task complete.
+
+## SKILLS LOCATION
+All skills are stored on GitHub at:
+https://raw.githubusercontent.com/jfgreco84-commits/dbw-claude-skills/main/
+Available skills:
+reed-intel.skill
+dbw-opening-lines.skill
+dbw-contact-enrichment.skill
+dbw-lead-research.skill
+lead-card-format.skill
+dbw-lead-system-rules.skill
+Fetch each skill by appending its filename to the
+base URL above.

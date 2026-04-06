@@ -1,0 +1,110 @@
+---
+name: dbw-opening-lines
+description: DBW opening lines skill. Call this skill
+when you have a contact name and at least one name
+drop ready. Pass in the contact first name, PWD name
+from REED intel, competing bidder name, and local
+supplier name. Returns all 3 opening line versions
+fully filled in plus a field read recommendation.
+---
+
+# DBW OPENING LINES SKILL
+
+## INPUTS REQUIRED
+Contact first name.
+Name drop 1: PWD name from REED intel — use this first
+if found. It is the most powerful name drop because
+it implies a relationship with the government official
+overseeing the work in that market.
+Name drop 2: Competing bidder name from the same
+project — implies you work with their competition,
+which creates urgency.
+Name drop 3: Local supplier name — use as fallback
+when no project intel is available.
+
+Use the best 2 to 3 name drops available. Never
+fabricate names under any circumstance. If nothing
+is found for a name drop position, skip it rather
+than inventing something.
+
+## NAME DROP ASSEMBLY
+Build the name drop phrase using this structure:
+PWD name plus "over at" plus city plus "public works,
+and guys like" plus bidder name plus "and" plus
+supplier name.
+If no PWD is found, use bidder and supplier only.
+If no project is found, use supplier names only.
+
+## VERSION 1 — AGGRESSIVE
+Use when the contact sounds skeptical, alpha, or
+guarded on the call. This version challenges their
+identity as a professional and forces them to align
+with being sharp rather than cheap.
+
+Script:
+[FIRST NAME], what's going on — real quick, I'm
+working with [NAME DROPS] right there in your area.
+We've been saving those guys serious time and money
+on their cuts. When your name came up, nobody hyped
+you up — they just said you're a pro who knows
+exactly what he's doing. So let me ask you straight
+— you're not the type of guy who's okay wasting time
+or burning through cheap blades just to save a few
+bucks upfront right?
+Good. Give me 15 seconds — I'll show you exactly
+what we're doing for those guys. If it makes sense,
+we'll talk. If not, I'm out of your hair. Fair?
+
+## VERSION 2 — LAID-BACK MIDWEST
+Use when the contact sounds relaxed, friendly, or
+chatty. This version feels human and conversational,
+like a guy leaning on a truck talking. Midwestern
+contractors buy from people they like, not people
+who bulldoze them.
+
+Script:
+Hey [FIRST NAME], how's it going man? Listen, I've
+been working with a few guys around your area —
+[NAME DROPS]. Good people. We've been having really
+solid luck helping them out on their jobs, saving them
+a little time, a little money. When I heard your name,
+they didn't oversell it — just said you're a good,
+reputable contractor who takes pride in your work.
+So I figured I'd give you a quick shout. If you're
+open to it, give me like 15 seconds — I'll run it
+by you. If it's not for you, no hard feelings, I'll
+let you get back to it. Sound fair?
+
+## VERSION 3 — DECISION-MAKER SHORTCUT
+Use when the contact answers fast, sounds busy, or
+seems rushed. This version respects their time,
+gets straight to the point, and ends with a
+yes-question that is almost impossible to say no to.
+
+Script:
+[FIRST NAME], quick one — I work with [NAME DROPS]
+in your area. We've been helping them cut faster and
+get more life out of their blades. I got your name
+as someone who runs a tight job.
+Let me ask you this — if I could show you a better
+blade that saves you time and holds up longer, you'd
+at least take a look, right?
+Perfect. Give me 15 seconds — I'll get straight to
+the point. If it's not a fit, I'll let you go.
+
+## FIELD READ LOGIC
+After building all three versions, output a single
+sentence field read recommendation for the rep.
+Answered fast or sounded rushed equals Version 3.
+Sounded chill, talkative, or friendly equals Version 2.
+Sounded skeptical, guarded, or alpha equals Version 1.
+If no personality intel is available, default to
+Version 2 as the safest general approach.
+
+## OUTPUT FORMAT
+Return all three versions fully written out with the
+actual contact name and name drops substituted in.
+Never return template placeholders in the output.
+Label them V1 AGGRESSIVE, V2 MIDWEST, and V3 SHORTCUT.
+Follow with FIELD READ: and the one-sentence
+recommendation.

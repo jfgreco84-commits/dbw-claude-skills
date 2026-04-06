@@ -1,0 +1,75 @@
+---
+name: dbw-contact-enrichment
+description: DBW contact enrichment skill. Use this
+skill whenever finding contacts for construction
+companies in the DBW lead system. Handles contact
+lookup with ZoomInfo first, Apollo as fallback,
+priority ordering, and skip logic. Always use when
+building DBW lead cards and you need decision makers
+at a construction company.
+---
+
+# DBW CONTACT ENRICHMENT SKILL
+
+## PURPOSE
+Find real, verified contacts at each target company.
+ZoomInfo is always the primary source. Work through
+fallbacks in order only if ZoomInfo returns nothing.
+Never fabricate contacts. Never use placeholders.
+
+## CONTACT PRIORITY ORDER
+Always find the highest-ranking available contact.
+1. Owner, President, or Partner
+2. Superintendent, Site Super, or Shop Manager
+3. Operations Manager or VP of Operations
+4. Project Manager
+5. Foreman — last resort only
+
+Find between 1 and 5 contacts per company.
+More contacts means more chances to reach a decision
+maker. Always extract as many as ZoomInfo returns
+up to the maximum of 5.
+
+## STEP 1 — ZOOMINFO PRIMARY ENRICHMENT
+Call Enrich Contacts or Contact Research using the
+company name and location. This returns verified
+contacts with titles, direct lines, and mobile numbers.
+Then call Enrich Scoops on the same company.
+Scoops frequently surface mobile numbers, buying
+signals, and direct contact details that base
+enrichment misses.
+
+From ZoomInfo extract for every contact found:
+Full name, title, mobile number (always the priority
+number — label it with ZI to show it is verified),
+direct office line, and email address.
+If a field is not found, show a dash. Never leave
+a field blank and never guess.
+
+## STEP 2 — APOLLO FALLBACK
+Use only if ZoomInfo returns zero contacts.
+Run Apollo.io contact search using company name
+and location. Extract the same fields as above.
+
+## STEP 3 — LINKEDIN FALLBACK
+Use only if Apollo also returns nothing.
+Search LinkedIn for the company and find anyone
+carrying a field operations title matching the
+priority order above.
+
+## STEP 4 — SOCIAL AND WEB FALLBACK
+Use only if LinkedIn returns nothing.
+Check the company Facebook or Instagram About
+section for owner name or contact information.
+Then Google the company name plus superintendent
+or owner or project manager and extract whatever
+surfaces from their website, press releases, or
+public permit filings.
+
+## DISQUALIFICATION RULE
+If after exhausting all four steps you still cannot
+find at least 1 verified contact with a real phone
+number, disqualify that company as a lead entirely
+and replace it with a new company from the source
+waterfall. No exceptions. No placeholders. No guessed
+numbers. No fabricated data under any circumstances.
