@@ -1,0 +1,102 @@
+---
+name: mailchimp-merge-tags
+description: Mandatory Mailchimp merge tag rules and
+pre-send validation for every DBW email campaign.
+Load this skill before writing, editing, or sending
+any Mailchimp campaign HTML — including all
+dbw-rep-campaign-builder runs. It defines the only
+approved greeting syntax, bans malformed conditional
+tags, and requires a preflight scan of the final HTML
+so broken tags can never reach a recipient's inbox.
+---
+
+# MAILCHIMP MERGE TAG RULES
+
+## WHY THIS SKILL EXISTS
+A live campaign once went out with the greeting
+written as *|FNAME|**|ELSE|*there. Mailchimp only
+understands *|ELSE|* inside a complete conditional
+block, so every recipient saw the literal text:
+Froggy*|ELSE|*there —
+in their inbox. This skill exists so that never
+happens again. No exceptions, no shortcuts.
+
+## THE ONE APPROVED GREETING
+Use exactly this pattern for every greeting that
+falls back when the first name is missing:
+
+*|IF:FNAME|*Hey *|FNAME|* —*|ELSE|*Hey there —*|END:IF|*
+
+Adjust the wording (Hey/Hi/Morning) as the campaign
+requires, but the tag structure is fixed:
+IF opens it, ELSE splits it, END:IF closes it.
+All three tags must be present or none of them.
+
+## HARD RULES
+RULE 1 — *|ELSE|* is NEVER valid on its own. It only
+works between *|IF:...|* and *|END:IF|*. A bare
+*|ELSE|* prints as literal text in the email.
+
+RULE 2 — Every *|IF:...|* must have a matching
+*|END:IF|* in the same block of copy. Unclosed
+conditionals print as literal text.
+
+RULE 3 — Never split a merge tag across HTML tags.
+Editors sometimes wrap parts of a tag in <span> or
+<strong>. A tag like *|FN<span>AME|*</span> will not
+merge. Keep each full tag inside one text node.
+
+RULE 4 — Merge tags are case sensitive and use
+straight pipes and asterisks: *|FNAME|*. Never use
+smart quotes, spaces inside the tag, or lowercase
+field names.
+
+RULE 5 — Simpler is safer. If a fallback greeting is
+needed and conditionals feel risky, set a default
+value of "there" on the FNAME merge field in the
+audience settings and write the greeting as:
+Hey *|FNAME|* —
+Mailchimp fills the default automatically when the
+field is empty. This is the preferred approach for
+all DBW rep campaigns.
+
+## MANDATORY PREFLIGHT SCAN
+Before saving a campaign as draft and again before
+any send step, scan the complete final HTML and
+subject line and confirm every check below. If any
+check fails: STOP. Fix the HTML. Re-scan. Do not
+save or send until all checks pass.
+
+CHECK 1 — Search the HTML for the string *|ELSE|*.
+For every occurrence, confirm an *|IF: appears
+before it and an *|END:IF|* appears after it in the
+same conditional block. A bare *|ELSE|* is an
+automatic hard stop.
+
+CHECK 2 — Count *|IF: occurrences and *|END:IF|*
+occurrences. The counts must be equal.
+
+CHECK 3 — List every merge tag in the HTML (every
+substring starting *| and ending |*). Each must be
+a tag Mailchimp actually supports, spelled exactly:
+*|FNAME|* *|LNAME|* *|EMAIL|* *|IF:...|* *|ELSE|*
+*|ELSEIF:...|* *|END:IF|* *|UNSUB|* *|ARCHIVE|*
+*|LIST:COMPANY|* *|HTML:...|* or another documented
+Mailchimp tag. Anything unrecognized is a hard stop.
+
+CHECK 4 — Confirm no merge tag is interrupted by an
+HTML element (see RULE 3). View the raw HTML source,
+not the rendered preview, to verify.
+
+CHECK 5 — Send-to-self test when possible. If the
+workflow supports a test send, send one to
+jfgreco84@gmail.com and confirm the greeting renders
+as a real name or the fallback — never raw tag text —
+before the real send.
+
+## SCOPE
+These rules apply to every email built for DBW or
+Best Solution through any workflow: rep campaign
+blasts, one-off sends, test campaigns, everything.
+They apply to subject lines and preview text as well
+as body HTML.

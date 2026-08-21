@@ -142,5 +142,6 @@ dbw-contact-enrichment.skill
 dbw-lead-research.skill
 lead-card-format.skill
 dbw-lead-system-rules.skill
+mailchimp-merge-tags.skill
 Fetch each skill by appending its filename to the
 base URL above.
